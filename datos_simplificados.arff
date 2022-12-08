@@ -1,31 +1,30 @@
-@RELATION datos_simplificados
+@relation datos_simplificados
 
-@ATTRIBUTE attribute_0 {FALSE,TRUE,blueWins}
-@ATTRIBUTE attribute_1 {FALSE,TRUE,blueFirstBlood}
-@ATTRIBUTE attribute_2 REAL
-@ATTRIBUTE attribute_3 REAL
-@ATTRIBUTE attribute_4 REAL
-@ATTRIBUTE attribute_5 {FALSE,TRUE,blueDragons}
-@ATTRIBUTE attribute_6 {FALSE,TRUE,blueHeralds}
-@ATTRIBUTE attribute_7 REAL
-@ATTRIBUTE attribute_8 REAL
-@ATTRIBUTE attribute_9 REAL
-@ATTRIBUTE attribute_10 REAL
-@ATTRIBUTE attribute_11 REAL
-@ATTRIBUTE attribute_12 {FALSE,TRUE,redFirstBlood}
-@ATTRIBUTE attribute_13 REAL
-@ATTRIBUTE attribute_14 REAL
-@ATTRIBUTE attribute_15 REAL
-@ATTRIBUTE attribute_16 {FALSE,TRUE,redDragons}
-@ATTRIBUTE attribute_17 REAL
-@ATTRIBUTE attribute_18 REAL
-@ATTRIBUTE attribute_19 REAL
-@ATTRIBUTE attribute_20 REAL
-@ATTRIBUTE attribute_21 REAL
-@ATTRIBUTE attribute_22 REAL
+@attribute blueWins {FALSE,TRUE}
+@attribute blueFirstBlood {TRUE,FALSE}
+@attribute blueKills numeric
+@attribute blueDeaths numeric
+@attribute blueAssists numeric
+@attribute blueDragons {FALSE,TRUE}
+@attribute blueHeralds {FALSE,TRUE}
+@attribute blueTowersDestroyed numeric
+@attribute blueAvgLevel numeric
+@attribute blueTotalMinionsKilled numeric
+@attribute blueGoldDiff numeric
+@attribute blueExperienceDiff numeric
+@attribute redFirstBlood {FALSE,TRUE}
+@attribute redKills numeric
+@attribute redDeaths numeric
+@attribute redAssists numeric
+@attribute redDragons {FALSE,TRUE}
+@attribute redHeralds numeric
+@attribute redTowersDestroyed numeric
+@attribute redAvgLevel numeric
+@attribute redTotalMinionsKilled numeric
+@attribute redGoldDiff numeric
+@attribute redExperienceDiff numeric
 
-@DATA
-blueWins,blueFirstBlood,blueKills,blueDeaths,blueAssists,blueDragons,blueHeralds,blueTowersDestroyed,blueAvgLevel,blueTotalMinionsKilled,blueGoldDiff,blueExperienceDiff,redFirstBlood,redKills,redDeaths,redAssists,redDragons,redHeralds,redTowersDestroyed,redAvgLevel,redTotalMinionsKilled,redGoldDiff,redExperienceDiff
+@data
 FALSE,TRUE,9,6,11,FALSE,FALSE,0,6.6,195,643,-8,FALSE,6,9,8,FALSE,0,0,6.8,197,-643,8
 FALSE,FALSE,5,5,5,FALSE,FALSE,0,6.6,174,-2908,-1173,TRUE,5,5,2,TRUE,1,1,6.8,240,2908,1173
 FALSE,FALSE,7,11,4,TRUE,FALSE,0,6.4,186,-1172,-1033,TRUE,11,7,14,FALSE,0,0,6.8,203,1172,1033
