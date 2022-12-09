@@ -12,10 +12,6 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import weka.classifiers.Classifier;
-import weka.classifiers.trees.J48;
-import weka.core.Instances;
-import weka.core.converters.ConverterUtils;
 
 /**
  *
@@ -42,7 +38,7 @@ public class Modelo {
             Classifier cls = new J48();
 
             // train
-            Instances inst = leerInstancias("./training_data/iris.arff");
+            Instances inst = leerInstancias("./training_data/high_diamond_ranked_10min.arff");
             cls.buildClassifier(inst);
 
             // serialize model
