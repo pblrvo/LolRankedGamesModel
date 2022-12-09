@@ -1,40 +1,245 @@
 # APRENDIZAJE AUTOMÁTICO LolRankedGamesModel
 
-## SOLUCIONES DISTINTOS ALGORITMOS
-### RANDOM FOREST
+##### Realizaremos el aprendizaje cogiendo dátos de partidas del videojuego League Of Legends sobre quien gana la partida si el equipo rojo o el equipo azul básandonos en los datos de los 10 primeros minutos de partida. En específico tomaremos los siguientes datos de ambos equipos:
+- [ ] Primera kill
+- [ ] Número de "Mounstros Élite" eliminados
+- [ ] Número de dragones conseguidos
+- [ ] Oro total
+- [ ] Experiencia Total
+- [ ] Diferencia de oro
+- [ ] Minions eliminados por minuto
+- [ ] Gana el equipo AZUL
+##### Dentro de weka los datos quedarían así para realizar las diferentes comprobaciones
 
 ```shell
 === Run information ===
 
 Scheme:       weka.classifiers.trees.RandomForest -P 100 -I 100 -num-slots 1 -K 0 -M 1.0 -V 0.001 -S 1
-Relation:     datos_simplificados
+Relation:     high_diamond_ranked_10min-weka.filters.unsupervised.attribute.Reorder-R2,3,4,5,6,7,8,9,10,11,12,13,14,15,1
 Instances:    9879
-Attributes:   23
-              blueWins
+Attributes:   15
               blueFirstBlood
-              blueKills
-              blueDeaths
-              blueAssists
+              blueEliteMonsters
               blueDragons
-              blueHeralds
-              blueTowersDestroyed
-              blueAvgLevel
-              blueTotalMinionsKilled
+              blueTotalGold
+              blueTotalExperience
               blueGoldDiff
-              blueExperienceDiff
+              blueCSPerMin
               redFirstBlood
-              redKills
-              redDeaths
-              redAssists
+              redEliteMonsters
               redDragons
-              redHeralds
-              redTowersDestroyed
-              redAvgLevel
-              redTotalMinionsKilled
+              redTotalGold
+              redTotalExperience
               redGoldDiff
-              redExperienceDiff
+              redCSPerMin
+              blueWins
 Test mode:    10-fold cross-validation
+```
 
+## SOLUCIONES DISTINTOS ALGORITMOS
+#### Multilayer Perceptron
+
+```shell
+
+=== Classifier model (full training set) ===
+
+Sigmoid Node 0
+    Inputs    Weights
+    Threshold    -0.20626935718259112
+    Node 2    0.6754256664027997
+    Node 3    -0.8450093104064836
+    Node 4    -0.6368432850607662
+    Node 5    -0.6252960933625291
+    Node 6    -1.0970169417384408
+    Node 7    1.0426324677655412
+    Node 8    0.8643699995362139
+    Node 9    4.160813349585542
+Sigmoid Node 1
+    Inputs    Weights
+    Threshold    0.20626935718259107
+    Node 2    -0.6754256664027998
+    Node 3    0.8450093104064834
+    Node 4    0.636843285060767
+    Node 5    0.6252960933625291
+    Node 6    1.0970169417384403
+    Node 7    -1.042632467765541
+    Node 8    -0.8643699995362137
+    Node 9    -4.160813349585545
+Sigmoid Node 2
+    Inputs    Weights
+    Threshold    -12.33552687700015
+    Attrib blueFirstBlood=FALSE    -1.234458362409553
+    Attrib blueEliteMonsters    -6.3842574261435345
+    Attrib blueDragons=TRUE    2.2361106448618027
+    Attrib blueTotalGold    -7.379283436295732
+    Attrib blueTotalExperience    -0.4236024780459842
+    Attrib blueGoldDiff    -6.270811335463747
+    Attrib blueCSPerMin    -7.7852117276282895
+    Attrib redFirstBlood=TRUE    -1.1468316855818017
+    Attrib redEliteMonsters    -9.407773460901216
+    Attrib redDragons=TRUE    5.720274617125802
+    Attrib redTotalGold    4.031386802407705
+    Attrib redTotalExperience    9.330695507486695
+    Attrib redGoldDiff    6.277840388322294
+    Attrib redCSPerMin    -4.507749519178261
+Sigmoid Node 3
+    Inputs    Weights
+    Threshold    -11.23168516245016
+    Attrib blueFirstBlood=FALSE    -0.9265762399291405
+    Attrib blueEliteMonsters    -3.3125649608856405
+    Attrib blueDragons=TRUE    2.7543408228757977
+    Attrib blueTotalGold    7.366546826694323
+    Attrib blueTotalExperience    21.200234431128713
+    Attrib blueGoldDiff    13.00603713789047
+    Attrib blueCSPerMin    -5.2543966269276146
+    Attrib redFirstBlood=TRUE    -0.9372273883338456
+    Attrib redEliteMonsters    -2.4029095957106796
+    Attrib redDragons=TRUE    0.2931363082600411
+    Attrib redTotalGold    -16.60152700262533
+    Attrib redTotalExperience    -6.461865682318424
+    Attrib redGoldDiff    -12.975430672627681
+    Attrib redCSPerMin    -2.18372627276877
+Sigmoid Node 4
+    Inputs    Weights
+    Threshold    -7.210722271541715
+    Attrib blueFirstBlood=FALSE    -1.8797996883730936
+    Attrib blueEliteMonsters    1.5895330251915807
+    Attrib blueDragons=TRUE    -0.1280056160651928
+    Attrib blueTotalGold    -2.1485344900369685
+    Attrib blueTotalExperience    4.439898829022466
+    Attrib blueGoldDiff    4.861782254397936
+    Attrib blueCSPerMin    -3.3040107743064118
+    Attrib redFirstBlood=TRUE    -1.947967266360278
+    Attrib redEliteMonsters    3.7202980314764154
+    Attrib redDragons=TRUE    -2.7974730262134604
+    Attrib redTotalGold    -11.810296797242378
+    Attrib redTotalExperience    -7.357000786884058
+    Attrib redGoldDiff    -4.915798230855615
+    Attrib redCSPerMin    -11.15621405228082
+Sigmoid Node 5
+    Inputs    Weights
+    Threshold    -11.487726304600965
+    Attrib blueFirstBlood=FALSE    0.3504067835031053
+    Attrib blueEliteMonsters    4.820131593291832
+    Attrib blueDragons=TRUE    1.1036326552234959
+    Attrib blueTotalGold    -6.134375709972104
+    Attrib blueTotalExperience    13.41535233413009
+    Attrib blueGoldDiff    2.1206302774283183
+    Attrib blueCSPerMin    -4.040364021537203
+    Attrib redFirstBlood=TRUE    0.35310191688797554
+    Attrib redEliteMonsters    -0.3587185587941613
+    Attrib redDragons=TRUE    -1.8662375891832124
+    Attrib redTotalGold    -10.997215276569579
+    Attrib redTotalExperience    -2.6139560394211125
+    Attrib redGoldDiff    -2.133108186003303
+    Attrib redCSPerMin    -0.4944192116621434
+Sigmoid Node 6
+    Inputs    Weights
+    Threshold    -11.810497927513751
+    Attrib blueFirstBlood=FALSE    0.94297719139047
+    Attrib blueEliteMonsters    -1.1162518909498826
+    Attrib blueDragons=TRUE    1.1419414799321637
+    Attrib blueTotalGold    9.998390850277824
+    Attrib blueTotalExperience    3.679696421256237
+    Attrib blueGoldDiff    4.928371291913049
+    Attrib blueCSPerMin    7.975347675511298
+    Attrib redFirstBlood=TRUE    0.9564062973829277
+    Attrib redEliteMonsters    -3.50093083108605
+    Attrib redDragons=TRUE    -0.15720538983907265
+    Attrib redTotalGold    1.8064508776410007
+    Attrib redTotalExperience    -8.860687685893238
+    Attrib redGoldDiff    -4.976604368536057
+    Attrib redCSPerMin    3.9343581131043672
+Sigmoid Node 7
+    Inputs    Weights
+    Threshold    -15.950476443956404
+    Attrib blueFirstBlood=FALSE    -0.7264301206319903
+    Attrib blueEliteMonsters    2.350270599685101
+    Attrib blueDragons=TRUE    -4.954122067875707
+    Attrib blueTotalGold    -10.84227139602112
+    Attrib blueTotalExperience    -1.4108316958335747
+    Attrib blueGoldDiff    -6.563897312503132
+    Attrib blueCSPerMin    10.079765771908287
+    Attrib redFirstBlood=TRUE    -0.8230934490724684
+    Attrib redEliteMonsters    4.063913181510177
+    Attrib redDragons=TRUE    -0.7825991943400182
+    Attrib redTotalGold    0.7187202400257062
+    Attrib redTotalExperience    16.19439603929679
+    Attrib redGoldDiff    6.525591466499703
+    Attrib redCSPerMin    -1.81144960504719
+Sigmoid Node 8
+    Inputs    Weights
+    Threshold    -5.3704977354233066
+    Attrib blueFirstBlood=FALSE    2.617427602184948
+    Attrib blueEliteMonsters    0.29003798334032377
+    Attrib blueDragons=TRUE    0.26037761553451805
+    Attrib blueTotalGold    -9.98639870388995
+    Attrib blueTotalExperience    -16.61181458489764
+    Attrib blueGoldDiff    -10.032163435705284
+    Attrib blueCSPerMin    3.8225253432139645
+    Attrib redFirstBlood=TRUE    2.5400878259086332
+    Attrib redEliteMonsters    0.02368709344043355
+    Attrib redDragons=TRUE    1.2236134384347357
+    Attrib redTotalGold    8.339055302044413
+    Attrib redTotalExperience    10.28487891625706
+    Attrib redGoldDiff    10.084137746657161
+    Attrib redCSPerMin    -7.688769076558862
+Sigmoid Node 9
+    Inputs    Weights
+    Threshold    -8.140116378803336
+    Attrib blueFirstBlood=FALSE    -0.4318252814960838
+    Attrib blueEliteMonsters    3.5589852712337957
+    Attrib blueDragons=TRUE    -0.45079191798958573
+    Attrib blueTotalGold    -6.7104608868201545
+    Attrib blueTotalExperience    -5.6483349669995055
+    Attrib blueGoldDiff    -7.603459269265206
+    Attrib blueCSPerMin    5.990930557562433
+    Attrib redFirstBlood=TRUE    -0.47342562046608677
+    Attrib redEliteMonsters    1.4961378985385891
+    Attrib redDragons=TRUE    -1.1132344219700756
+    Attrib redTotalGold    7.294718221040438
+    Attrib redTotalExperience    -9.630016359989055
+    Attrib redGoldDiff    7.591029854000683
+    Attrib redCSPerMin    2.6424275206517596
+Class FALSE
+    Input
+    Node 0
+Class TRUE
+    Input
+    Node 1
+
+
+Time taken to build model: 9.42 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances        7101               71.8797 %
+Incorrectly Classified Instances      2778               28.1203 %
+Kappa statistic                          0.4377
+Mean absolute error                      0.3513
+Root mean squared error                  0.4286
+Relative absolute error                 70.2542 %
+Root relative squared error             85.7103 %
+Total Number of Instances             9879     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,693    0,255    0,732      0,693    0,712      0,438    0,800     0,796     FALSE
+                 0,745    0,307    0,707      0,745    0,726      0,438    0,800     0,797     TRUE
+Weighted Avg.    0,719    0,281    0,719      0,719    0,719      0,438    0,800     0,796     
+
+=== Confusion Matrix ===
+
+    a    b   <-- classified as
+ 3428 1521 |    a = FALSE
+ 1257 3673 |    b = TRUE
+```
+
+#### Random Forest
+
+```shell
 === Classifier model (full training set) ===
 
 RandomForest
@@ -43,66 +248,36 @@ Bagging with 100 iterations and base learner
 
 weka.classifiers.trees.RandomTree -K 0 -M 1.0 -V 0.001 -S 1 -do-not-check-capabilities
 
-Time taken to build model: 3.05 seconds
+Time taken to build model: 2.93 seconds
 
 === Stratified cross-validation ===
 === Summary ===
 
-Correctly Classified Instances        7098               71.8494 %
-Incorrectly Classified Instances      2781               28.1506 %
-Kappa statistic                          0.437 
-Mean absolute error                      0.3605
-Root mean squared error                  0.43  
-Relative absolute error                 72.1088 %
-Root relative squared error             85.997  %
+Correctly Classified Instances        7103               71.9    %
+Incorrectly Classified Instances      2776               28.1    %
+Kappa statistic                          0.438 
+Mean absolute error                      0.3576
+Root mean squared error                  0.4296
+Relative absolute error                 71.5113 %
+Root relative squared error             85.9124 %
 Total Number of Instances             9879     
 
 === Detailed Accuracy By Class ===
 
                  TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
-                 0,732    0,295    0,714      0,732    0,723      0,437    0,795     0,790     FALSE
-                 0,705    0,268    0,724      0,705    0,714      0,437    0,795     0,788     TRUE
-Weighted Avg.    0,718    0,282    0,719      0,718    0,718      0,437    0,795     0,789     
+                 0,730    0,292    0,715      0,730    0,722      0,438    0,796     0,791     FALSE
+                 0,708    0,270    0,723      0,708    0,716      0,438    0,796     0,791     TRUE
+Weighted Avg.    0,719    0,281    0,719      0,719    0,719      0,438    0,796     0,791     
 
 === Confusion Matrix ===
 
     a    b   <-- classified as
- 3622 1327 |    a = FALSE
- 1454 3476 |    b = TRUE
+ 3611 1338 |    a = FALSE
+ 1438 3492 |    b = TRUE
 ```
-### J48(ID3)
+#### J48 (ID30)
+
 ```shell
-=== Run information ===
-
-Scheme:       weka.classifiers.trees.J48 -C 0.25 -M 2
-Relation:     datos_simplificados
-Instances:    9879
-Attributes:   23
-              blueWins
-              blueFirstBlood
-              blueKills
-              blueDeaths
-              blueAssists
-              blueDragons
-              blueHeralds
-              blueTowersDestroyed
-              blueAvgLevel
-              blueTotalMinionsKilled
-              blueGoldDiff
-              blueExperienceDiff
-              redFirstBlood
-              redKills
-              redDeaths
-              redAssists
-              redDragons
-              redHeralds
-              redTowersDestroyed
-              redAvgLevel
-              redTotalMinionsKilled
-              redGoldDiff
-              redExperienceDiff
-Test mode:    10-fold cross-validation
-
 === Classifier model (full training set) ===
 
 J48 pruned tree
@@ -113,1147 +288,276 @@ blueGoldDiff <= 211
 |   blueGoldDiff > -1930
 |   |   blueDragons = FALSE
 |   |   |   blueGoldDiff <= -858
-|   |   |   |   redTowersDestroyed <= 0
-|   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   redAvgLevel <= 6.6
-|   |   |   |   |   |   |   redAssists <= 13
-|   |   |   |   |   |   |   |   blueDeaths <= 4: TRUE (6.0/1.0)
-|   |   |   |   |   |   |   |   blueDeaths > 4
-|   |   |   |   |   |   |   |   |   blueGoldDiff <= -1679: TRUE (4.0)
-|   |   |   |   |   |   |   |   |   blueGoldDiff > -1679
-|   |   |   |   |   |   |   |   |   |   redAssists <= 11: FALSE (31.0/8.0)
-|   |   |   |   |   |   |   |   |   |   redAssists > 11: TRUE (6.0/2.0)
-|   |   |   |   |   |   |   redAssists > 13: FALSE (9.0)
-|   |   |   |   |   |   redAvgLevel > 6.6
-|   |   |   |   |   |   |   blueAvgLevel <= 6.6
-|   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   |   redDragons = FALSE: FALSE (8.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   redDragons = TRUE
-|   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= -2280: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > -2280: TRUE (8.0/1.0)
-|   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.4: FALSE (13.0)
-|   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.4
-|   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 8
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 4
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 3: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 3: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAssists > 4: FALSE (25.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 8
-|   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 205: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 205: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   redHeralds > 0
-|   |   |   |   |   |   |   |   |   |   blueKills <= 4
-|   |   |   |   |   |   |   |   |   |   |   redAssists <= 3: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   redAssists > 3: TRUE (7.0/1.0)
-|   |   |   |   |   |   |   |   |   |   blueKills > 4: FALSE (7.0)
-|   |   |   |   |   |   |   |   blueFirstBlood = FALSE: FALSE (123.0/20.0)
-|   |   |   |   |   |   |   blueAvgLevel > 6.6
-|   |   |   |   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   |   blueAssists <= 6: FALSE (98.0/17.0)
-|   |   |   |   |   |   |   |   |   |   blueAssists > 6
-|   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   redDragons = FALSE
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 10: FALSE (8.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAssists > 10: TRUE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redDragons = TRUE
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.8: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= -1672: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > -1672: FALSE (8.0/2.0)
-|   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 6: FALSE (9.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueKills > 6
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 7: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 8
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redDragons = FALSE
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 8: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 8: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redDragons = TRUE: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 8: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   |   |   |   |   redDragons = FALSE
-|   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 7.2
-|   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 0: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 0
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 12: FALSE (35.0/6.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists > 12: TRUE (6.0/2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= -1027: FALSE (6.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > -1027
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 9
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 6
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 4
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 257: TRUE (7.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 257: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 4: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 6: TRUE (5.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 9: FALSE (6.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7: FALSE (11.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 7.2
-|   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 2: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 2: FALSE (8.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 7: TRUE (4.0)
-|   |   |   |   |   |   |   |   |   |   redDragons = TRUE
-|   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 192
-|   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 221: TRUE (9.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 221
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 190: FALSE (5.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 190: TRUE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 192
-|   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 249: FALSE (197.0/40.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 249
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 6
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 210: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 210
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= -1436: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > -1436: FALSE (5.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists > 6: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 4: FALSE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 4
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= -1640
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 226: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 226: TRUE (3.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > -1640: TRUE (10.0)
-|   |   |   |   |   |   |   |   redHeralds > 0
-|   |   |   |   |   |   |   |   |   redAvgLevel <= 7.2
-|   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7: FALSE (103.0/18.0)
-|   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7
-|   |   |   |   |   |   |   |   |   |   |   redDragons = FALSE: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   redDragons = TRUE
-|   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= -1623: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > -1623: FALSE (7.0)
-|   |   |   |   |   |   |   |   |   redAvgLevel > 7.2
-|   |   |   |   |   |   |   |   |   |   redDragons = FALSE: TRUE (4.0)
-|   |   |   |   |   |   |   |   |   |   redDragons = TRUE
-|   |   |   |   |   |   |   |   |   |   |   blueKills <= 6: FALSE (11.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   blueKills > 6: TRUE (2.0)
-|   |   |   |   |   blueHeralds = TRUE
-|   |   |   |   |   |   blueAssists <= 1: FALSE (11.0)
-|   |   |   |   |   |   blueAssists > 1
-|   |   |   |   |   |   |   redDragons = FALSE
-|   |   |   |   |   |   |   |   blueKills <= 6
-|   |   |   |   |   |   |   |   |   blueAssists <= 4
-|   |   |   |   |   |   |   |   |   |   blueAssists <= 3
-|   |   |   |   |   |   |   |   |   |   |   redAssists <= 2: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   redAssists > 2: FALSE (7.0/1.0)
-|   |   |   |   |   |   |   |   |   |   blueAssists > 3
-|   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 208: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 208: TRUE (6.0)
-|   |   |   |   |   |   |   |   |   blueAssists > 4: FALSE (8.0/1.0)
-|   |   |   |   |   |   |   |   blueKills > 6: TRUE (8.0/1.0)
-|   |   |   |   |   |   |   redDragons = TRUE
-|   |   |   |   |   |   |   |   blueTowersDestroyed <= 0
-|   |   |   |   |   |   |   |   |   blueExperienceDiff <= -474: FALSE (72.0/16.0)
-|   |   |   |   |   |   |   |   |   blueExperienceDiff > -474
-|   |   |   |   |   |   |   |   |   |   blueKills <= 7
-|   |   |   |   |   |   |   |   |   |   |   blueAssists <= 6
-|   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 2: TRUE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 2: FALSE (14.0/2.0)
-|   |   |   |   |   |   |   |   |   |   |   blueAssists > 6: TRUE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   |   blueKills > 7: FALSE (6.0/2.0)
-|   |   |   |   |   |   |   |   blueTowersDestroyed > 0
-|   |   |   |   |   |   |   |   |   blueAssists <= 5: TRUE (5.0/1.0)
-|   |   |   |   |   |   |   |   |   blueAssists > 5: FALSE (2.0)
-|   |   |   |   redTowersDestroyed > 0
-|   |   |   |   |   redTowersDestroyed <= 1
-|   |   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   |   redDragons = FALSE: FALSE (5.0/1.0)
-|   |   |   |   |   |   |   redDragons = TRUE
-|   |   |   |   |   |   |   |   blueKills <= 6: TRUE (5.0)
-|   |   |   |   |   |   |   |   blueKills > 6
-|   |   |   |   |   |   |   |   |   blueHeralds = FALSE: TRUE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   blueHeralds = TRUE: FALSE (2.0)
-|   |   |   |   |   |   redHeralds > 0: FALSE (16.0/2.0)
-|   |   |   |   |   redTowersDestroyed > 1: TRUE (2.0)
+|   |   |   |   blueEliteMonsters <= 0
+|   |   |   |   |   redCSPerMin <= 25.1: FALSE (848.0/210.0)
+|   |   |   |   |   redCSPerMin > 25.1
+|   |   |   |   |   |   redCSPerMin <= 26.5
+|   |   |   |   |   |   |   blueTotalGold <= 15583: FALSE (38.0/9.0)
+|   |   |   |   |   |   |   blueTotalGold > 15583
+|   |   |   |   |   |   |   |   redCSPerMin <= 25.8: TRUE (13.0/4.0)
+|   |   |   |   |   |   |   |   redCSPerMin > 25.8: FALSE (6.0/1.0)
+|   |   |   |   |   |   redCSPerMin > 26.5: TRUE (6.0/2.0)
+|   |   |   |   blueEliteMonsters > 0
+|   |   |   |   |   redEliteMonsters <= 0
+|   |   |   |   |   |   blueFirstBlood = TRUE
+|   |   |   |   |   |   |   redTotalExperience <= 17986: FALSE (4.0)
+|   |   |   |   |   |   |   redTotalExperience > 17986
+|   |   |   |   |   |   |   |   blueCSPerMin <= 18.8: FALSE (2.0)
+|   |   |   |   |   |   |   |   blueCSPerMin > 18.8
+|   |   |   |   |   |   |   |   |   blueCSPerMin <= 22.6: TRUE (6.0)
+|   |   |   |   |   |   |   |   |   blueCSPerMin > 22.6: FALSE (2.0)
+|   |   |   |   |   |   blueFirstBlood = FALSE
+|   |   |   |   |   |   |   blueTotalGold <= 15558
+|   |   |   |   |   |   |   |   blueCSPerMin <= 19: TRUE (4.0/1.0)
+|   |   |   |   |   |   |   |   blueCSPerMin > 19: FALSE (9.0)
+|   |   |   |   |   |   |   blueTotalGold > 15558: TRUE (10.0/2.0)
+|   |   |   |   |   redEliteMonsters > 0
+|   |   |   |   |   |   blueFirstBlood = TRUE
+|   |   |   |   |   |   |   blueCSPerMin <= 23.5
+|   |   |   |   |   |   |   |   blueTotalGold <= 17478: FALSE (42.0/10.0)
+|   |   |   |   |   |   |   |   blueTotalGold > 17478: TRUE (3.0)
+|   |   |   |   |   |   |   blueCSPerMin > 23.5: TRUE (3.0)
+|   |   |   |   |   |   blueFirstBlood = FALSE
+|   |   |   |   |   |   |   redTotalGold <= 17904
+|   |   |   |   |   |   |   |   blueTotalGold <= 16035: FALSE (46.0/9.0)
+|   |   |   |   |   |   |   |   blueTotalGold > 16035
+|   |   |   |   |   |   |   |   |   redCSPerMin <= 22.1: TRUE (8.0)
+|   |   |   |   |   |   |   |   |   redCSPerMin > 22.1
+|   |   |   |   |   |   |   |   |   |   redCSPerMin <= 22.8: FALSE (3.0)
+|   |   |   |   |   |   |   |   |   |   redCSPerMin > 22.8: TRUE (4.0/1.0)
+|   |   |   |   |   |   |   redTotalGold > 17904: FALSE (15.0)
 |   |   |   blueGoldDiff > -858
-|   |   |   |   blueDeaths <= 3
-|   |   |   |   |   redDragons = FALSE
-|   |   |   |   |   |   redAvgLevel <= 7
-|   |   |   |   |   |   |   redAssists <= 1: TRUE (8.0/2.0)
-|   |   |   |   |   |   |   redAssists > 1
-|   |   |   |   |   |   |   |   blueDeaths <= 2: FALSE (4.0/1.0)
-|   |   |   |   |   |   |   |   blueDeaths > 2
-|   |   |   |   |   |   |   |   |   blueGoldDiff <= -393: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   blueGoldDiff > -393
-|   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 103
-|   |   |   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE: FALSE (5.0)
-|   |   |   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 396: FALSE (7.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 396: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   blueGoldDiff > 103: TRUE (2.0)
-|   |   |   |   |   |   redAvgLevel > 7: FALSE (4.0)
-|   |   |   |   |   redDragons = TRUE
-|   |   |   |   |   |   blueAvgLevel <= 6.6
-|   |   |   |   |   |   |   blueExperienceDiff <= -494: TRUE (5.0)
-|   |   |   |   |   |   |   blueExperienceDiff > -494: FALSE (3.0)
-|   |   |   |   |   |   blueAvgLevel > 6.6
-|   |   |   |   |   |   |   redAssists <= 2
-|   |   |   |   |   |   |   |   blueFirstBlood = TRUE: FALSE (16.0/4.0)
+|   |   |   |   redEliteMonsters <= 0: FALSE (315.0/150.0)
+|   |   |   |   redEliteMonsters > 0
+|   |   |   |   |   redTotalExperience <= 18957
+|   |   |   |   |   |   redEliteMonsters <= 1
+|   |   |   |   |   |   |   redDragons = FALSE
+|   |   |   |   |   |   |   |   redTotalGold <= 18189
+|   |   |   |   |   |   |   |   |   blueTotalExperience <= 18551
+|   |   |   |   |   |   |   |   |   |   redCSPerMin <= 19: TRUE (2.0)
+|   |   |   |   |   |   |   |   |   |   redCSPerMin > 19
+|   |   |   |   |   |   |   |   |   |   |   redCSPerMin <= 24.6
+|   |   |   |   |   |   |   |   |   |   |   |   blueTotalExperience <= 17080
+|   |   |   |   |   |   |   |   |   |   |   |   |   redCSPerMin <= 21.9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   redCSPerMin <= 21.2: FALSE (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   redCSPerMin > 21.2: TRUE (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   redCSPerMin > 21.9: FALSE (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   blueTotalExperience > 17080: FALSE (19.0)
+|   |   |   |   |   |   |   |   |   |   |   redCSPerMin > 24.6: TRUE (2.0)
+|   |   |   |   |   |   |   |   |   blueTotalExperience > 18551: TRUE (3.0)
+|   |   |   |   |   |   |   |   redTotalGold > 18189: TRUE (5.0)
+|   |   |   |   |   |   |   redDragons = TRUE
+|   |   |   |   |   |   |   |   blueEliteMonsters <= 0: FALSE (385.0/155.0)
+|   |   |   |   |   |   |   |   blueEliteMonsters > 0
+|   |   |   |   |   |   |   |   |   blueTotalGold <= 15092: FALSE (11.0)
+|   |   |   |   |   |   |   |   |   blueTotalGold > 15092
+|   |   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE
+|   |   |   |   |   |   |   |   |   |   |   blueTotalExperience <= 18766: TRUE (40.0/19.0)
+|   |   |   |   |   |   |   |   |   |   |   blueTotalExperience > 18766: FALSE (6.0)
+|   |   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE
+|   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= -473
+|   |   |   |   |   |   |   |   |   |   |   |   redCSPerMin <= 19.1: TRUE (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   redCSPerMin > 19.1: FALSE (16.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > -473: TRUE (42.0/17.0)
+|   |   |   |   |   |   redEliteMonsters > 1
+|   |   |   |   |   |   |   blueTotalGold <= 15912
+|   |   |   |   |   |   |   |   blueFirstBlood = TRUE
+|   |   |   |   |   |   |   |   |   redCSPerMin <= 22.7
+|   |   |   |   |   |   |   |   |   |   blueTotalGold <= 15767: TRUE (6.0/1.0)
+|   |   |   |   |   |   |   |   |   |   blueTotalGold > 15767: FALSE (2.0)
+|   |   |   |   |   |   |   |   |   redCSPerMin > 22.7: FALSE (8.0)
 |   |   |   |   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   |   |   |   blueAssists <= 2: FALSE (7.0/1.0)
-|   |   |   |   |   |   |   |   |   blueAssists > 2: TRUE (6.0/1.0)
-|   |   |   |   |   |   |   redAssists > 2: FALSE (37.0/2.0)
-|   |   |   |   blueDeaths > 3
-|   |   |   |   |   blueExperienceDiff <= -906
-|   |   |   |   |   |   blueAvgLevel <= 7
-|   |   |   |   |   |   |   blueAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   blueAssists <= 12
-|   |   |   |   |   |   |   |   |   redDragons = FALSE
-|   |   |   |   |   |   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 10
-|   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 3: TRUE (6.0/2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redAssists > 3
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.6
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= -659: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > -659: FALSE (14.0/3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.6: FALSE (17.0/2.0)
-|   |   |   |   |   |   |   |   |   |   |   blueDeaths > 10: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   redHeralds > 0: FALSE (8.0)
-|   |   |   |   |   |   |   |   |   redDragons = TRUE
-|   |   |   |   |   |   |   |   |   |   redAvgLevel <= 7.2
-|   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.6
-|   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 6
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= -1616: FALSE (10.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > -1616
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 219: TRUE (5.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 219: FALSE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueHeralds = TRUE: FALSE (13.0/2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 6: FALSE (18.0)
-|   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.6
-|   |   |   |   |   |   |   |   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 226
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 3: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 3
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= -1911: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > -1911: FALSE (15.0/3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 7: TRUE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists > 7: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 226: FALSE (9.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redHeralds > 0
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 3: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 3
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 6: FALSE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 6: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   redAvgLevel > 7.2: FALSE (6.0)
-|   |   |   |   |   |   |   |   blueAssists > 12
-|   |   |   |   |   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.4: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.4: FALSE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   redHeralds > 0: TRUE (2.0)
-|   |   |   |   |   |   |   blueAvgLevel > 6.8
-|   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 204: TRUE (5.0)
-|   |   |   |   |   |   |   |   blueTotalMinionsKilled > 204
-|   |   |   |   |   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 7.2
-|   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 6
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueHeralds = FALSE: TRUE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueHeralds = TRUE: FALSE (3.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 6
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 5: TRUE (3.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 5: FALSE (6.0)
-|   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 7.2: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   |   |   |   |   |   redAssists <= 4: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   redAssists > 4
-|   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 8: TRUE (8.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redAssists > 8: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   redHeralds > 0
-|   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 227: FALSE (7.0)
-|   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 227: TRUE (4.0/1.0)
-|   |   |   |   |   |   blueAvgLevel > 7: FALSE (12.0)
-|   |   |   |   |   blueExperienceDiff > -906
-|   |   |   |   |   |   blueAvgLevel <= 6.8
-|   |   |   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   |   |   redDragons = FALSE
-|   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.6
-|   |   |   |   |   |   |   |   |   |   blueKills <= 4: FALSE (5.0)
-|   |   |   |   |   |   |   |   |   |   blueKills > 4
-|   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 8
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.4
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 6: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 6: FALSE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.4: FALSE (7.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueKills > 8: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.8: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   blueAvgLevel > 6.6
-|   |   |   |   |   |   |   |   |   |   blueKills <= 3: FALSE (7.0/2.0)
-|   |   |   |   |   |   |   |   |   |   blueKills > 3
-|   |   |   |   |   |   |   |   |   |   |   blueKills <= 4: TRUE (13.0)
-|   |   |   |   |   |   |   |   |   |   |   blueKills > 4
-|   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.6
-|   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 218: TRUE (9.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 218: FALSE (3.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.6
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 10
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 6
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 5
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 753: FALSE (5.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 753: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 5: TRUE (8.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 6
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 9: FALSE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 9: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.8: FALSE (13.0/2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueHeralds = TRUE
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 6
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 6: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 6: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 6: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 7: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 10: TRUE (3.0)
-|   |   |   |   |   |   |   |   redDragons = TRUE
-|   |   |   |   |   |   |   |   |   redAssists <= 5: FALSE (46.0/15.0)
-|   |   |   |   |   |   |   |   |   redAssists > 5
-|   |   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 515: TRUE (52.0/17.0)
-|   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 515: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.6
-|   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 205
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 184: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 184: FALSE (9.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 205: TRUE (8.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.6
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 8: FALSE (13.0/2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAssists > 8
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 5: TRUE (7.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 5
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 212: FALSE (7.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 212: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.6: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.6
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 8: TRUE (11.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 8: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueHeralds = TRUE
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 235: TRUE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 235: FALSE (3.0/1.0)
-|   |   |   |   |   |   |   redHeralds > 0
-|   |   |   |   |   |   |   |   redDragons = FALSE
-|   |   |   |   |   |   |   |   |   redAvgLevel <= 6.6: TRUE (5.0/2.0)
-|   |   |   |   |   |   |   |   |   redAvgLevel > 6.6: FALSE (8.0/1.0)
-|   |   |   |   |   |   |   |   redDragons = TRUE
-|   |   |   |   |   |   |   |   |   blueKills <= 6
-|   |   |   |   |   |   |   |   |   |   redAssists <= 3: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   redAssists > 3
-|   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.6
-|   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 204: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 204: TRUE (5.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.6: FALSE (22.0/5.0)
-|   |   |   |   |   |   |   |   |   blueKills > 6: TRUE (7.0/1.0)
-|   |   |   |   |   |   blueAvgLevel > 6.8
-|   |   |   |   |   |   |   redTotalMinionsKilled <= 192
-|   |   |   |   |   |   |   |   blueAssists <= 10: FALSE (21.0/1.0)
-|   |   |   |   |   |   |   |   blueAssists > 10: TRUE (2.0)
-|   |   |   |   |   |   |   redTotalMinionsKilled > 192
-|   |   |   |   |   |   |   |   blueAssists <= 9
-|   |   |   |   |   |   |   |   |   blueAssists <= 8
-|   |   |   |   |   |   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   |   |   |   |   |   redDragons = FALSE
-|   |   |   |   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 758
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 4: TRUE (7.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 4
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 233
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 217: TRUE (7.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 217
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 170: TRUE (3.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 170: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 233: FALSE (5.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 758: FALSE (6.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 11
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 6
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 219
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 5: FALSE (9.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 5
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 209: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 209: FALSE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 219
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 221
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 7: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists > 7: TRUE (5.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 221: TRUE (7.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7: TRUE (8.0/2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueHeralds = TRUE
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7: TRUE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 6: TRUE (8.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAssists > 11: FALSE (5.0)
-|   |   |   |   |   |   |   |   |   |   |   redDragons = TRUE
-|   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 3
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 498: FALSE (22.0/2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 498: TRUE (8.0/2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueKills > 3
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 4
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.8: TRUE (5.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 5
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= -653: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > -653: TRUE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 5: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 4: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists > 4: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7: FALSE (3.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 1: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 1
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 216: FALSE (8.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 216: TRUE (14.0/3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 4
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7: FALSE (53.0/17.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7.2
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= -357: TRUE (3.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > -357: FALSE (6.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE: TRUE (17.0/6.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7.2: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueHeralds = TRUE
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 4: TRUE (6.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 4
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 8
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 5: TRUE (5.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists > 5
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 678: FALSE (12.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 678: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 8: TRUE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 206: TRUE (3.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 206: FALSE (7.0)
-|   |   |   |   |   |   |   |   |   |   redHeralds > 0
-|   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= -482: FALSE (10.0)
-|   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > -482
-|   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 233
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7.2
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   redDragons = FALSE
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   redDragons = TRUE: TRUE (21.0/2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7.2: FALSE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 233
-|   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 218: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 218: FALSE (11.0/1.0)
-|   |   |   |   |   |   |   |   |   blueAssists > 8
-|   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7: TRUE (10.0/1.0)
-|   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7
-|   |   |   |   |   |   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   |   |   |   |   |   redDragons = FALSE: TRUE (3.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redDragons = TRUE: FALSE (5.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   blueHeralds = TRUE: TRUE (2.0)
-|   |   |   |   |   |   |   |   blueAssists > 9
-|   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 238: FALSE (15.0/3.0)
-|   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 238: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   |   |   |   |   blueKills <= 9: FALSE (18.0/2.0)
-|   |   |   |   |   |   |   |   |   |   blueKills > 9: TRUE (3.0/1.0)
+|   |   |   |   |   |   |   |   |   blueCSPerMin <= 21.5: FALSE (9.0)
+|   |   |   |   |   |   |   |   |   blueCSPerMin > 21.5
+|   |   |   |   |   |   |   |   |   |   redTotalGold <= 16001
+|   |   |   |   |   |   |   |   |   |   |   blueTotalExperience <= 17148: FALSE (4.0)
+|   |   |   |   |   |   |   |   |   |   |   blueTotalExperience > 17148
+|   |   |   |   |   |   |   |   |   |   |   |   blueCSPerMin <= 22.9: TRUE (5.0)
+|   |   |   |   |   |   |   |   |   |   |   |   blueCSPerMin > 22.9
+|   |   |   |   |   |   |   |   |   |   |   |   |   redCSPerMin <= 23.5
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalExperience <= 17926: FALSE (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalExperience > 17926: TRUE (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   redCSPerMin > 23.5: FALSE (3.0)
+|   |   |   |   |   |   |   |   |   |   redTotalGold > 16001: FALSE (6.0)
+|   |   |   |   |   |   |   blueTotalGold > 15912
+|   |   |   |   |   |   |   |   blueFirstBlood = TRUE
+|   |   |   |   |   |   |   |   |   redTotalExperience <= 18003: TRUE (12.0/1.0)
+|   |   |   |   |   |   |   |   |   redTotalExperience > 18003: FALSE (13.0/3.0)
+|   |   |   |   |   |   |   |   blueFirstBlood = FALSE
+|   |   |   |   |   |   |   |   |   blueCSPerMin <= 22.2
+|   |   |   |   |   |   |   |   |   |   blueGoldDiff <= -169: TRUE (10.0)
+|   |   |   |   |   |   |   |   |   |   blueGoldDiff > -169
+|   |   |   |   |   |   |   |   |   |   |   blueTotalGold <= 16431: TRUE (4.0)
+|   |   |   |   |   |   |   |   |   |   |   blueTotalGold > 16431: FALSE (4.0/1.0)
+|   |   |   |   |   |   |   |   |   blueCSPerMin > 22.2
+|   |   |   |   |   |   |   |   |   |   blueGoldDiff <= -333: TRUE (5.0/1.0)
+|   |   |   |   |   |   |   |   |   |   blueGoldDiff > -333: FALSE (11.0/2.0)
+|   |   |   |   |   redTotalExperience > 18957
+|   |   |   |   |   |   blueEliteMonsters <= 0
+|   |   |   |   |   |   |   blueCSPerMin <= 24.2
+|   |   |   |   |   |   |   |   redTotalGold <= 16975
+|   |   |   |   |   |   |   |   |   redCSPerMin <= 21.7: FALSE (9.0)
+|   |   |   |   |   |   |   |   |   redCSPerMin > 21.7
+|   |   |   |   |   |   |   |   |   |   redEliteMonsters <= 1
+|   |   |   |   |   |   |   |   |   |   |   redTotalGold <= 16742: FALSE (23.0/5.0)
+|   |   |   |   |   |   |   |   |   |   |   redTotalGold > 16742: TRUE (7.0/1.0)
+|   |   |   |   |   |   |   |   |   |   redEliteMonsters > 1
+|   |   |   |   |   |   |   |   |   |   |   blueCSPerMin <= 22.6: FALSE (6.0)
+|   |   |   |   |   |   |   |   |   |   |   blueCSPerMin > 22.6: TRUE (5.0)
+|   |   |   |   |   |   |   |   redTotalGold > 16975: FALSE (27.0/1.0)
+|   |   |   |   |   |   |   blueCSPerMin > 24.2: FALSE (21.0)
+|   |   |   |   |   |   blueEliteMonsters > 0
+|   |   |   |   |   |   |   blueCSPerMin <= 22.1
+|   |   |   |   |   |   |   |   blueTotalGold <= 16703: TRUE (7.0)
+|   |   |   |   |   |   |   |   blueTotalGold > 16703
+|   |   |   |   |   |   |   |   |   redTotalExperience <= 19312: TRUE (3.0)
+|   |   |   |   |   |   |   |   |   redTotalExperience > 19312: FALSE (4.0)
+|   |   |   |   |   |   |   blueCSPerMin > 22.1: FALSE (12.0/2.0)
 |   |   blueDragons = TRUE
-|   |   |   blueTotalMinionsKilled <= 174: FALSE (28.0/4.0)
-|   |   |   blueTotalMinionsKilled > 174
-|   |   |   |   blueExperienceDiff <= -741
-|   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   blueDeaths <= 9
-|   |   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   |   blueDeaths <= 8
-|   |   |   |   |   |   |   |   |   redHeralds <= 0: FALSE (123.0/51.0)
-|   |   |   |   |   |   |   |   |   redHeralds > 0
-|   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.4: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.4
-|   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 4: FALSE (6.0)
-|   |   |   |   |   |   |   |   |   |   |   blueDeaths > 4
-|   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.6: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.6
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 10
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 228: FALSE (5.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 228: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= -1784
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.8: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.8: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > -1784: TRUE (11.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 10: FALSE (6.0/1.0)
-|   |   |   |   |   |   |   |   blueDeaths > 8
-|   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 217: FALSE (19.0/1.0)
-|   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 217: TRUE (4.0/1.0)
-|   |   |   |   |   |   |   blueHeralds = TRUE
-|   |   |   |   |   |   |   |   redAssists <= 7
-|   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.6: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   blueAvgLevel > 6.6
-|   |   |   |   |   |   |   |   |   |   blueDeaths <= 5: TRUE (7.0/1.0)
-|   |   |   |   |   |   |   |   |   |   blueDeaths > 5: FALSE (8.0/1.0)
-|   |   |   |   |   |   |   |   redAssists > 7: TRUE (11.0/1.0)
-|   |   |   |   |   |   blueDeaths > 9
-|   |   |   |   |   |   |   blueKills <= 7: FALSE (4.0/1.0)
-|   |   |   |   |   |   |   blueKills > 7
-|   |   |   |   |   |   |   |   blueGoldDiff <= -605: TRUE (11.0)
-|   |   |   |   |   |   |   |   blueGoldDiff > -605: FALSE (3.0/1.0)
-|   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   |   |   blueAvgLevel <= 6.6: FALSE (44.0/19.0)
-|   |   |   |   |   |   |   |   blueAvgLevel > 6.6
-|   |   |   |   |   |   |   |   |   blueAssists <= 2: FALSE (18.0/1.0)
-|   |   |   |   |   |   |   |   |   blueAssists > 2
-|   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.8: TRUE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 9: FALSE (30.0/6.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 9: TRUE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 198: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 198: FALSE (28.0/7.0)
-|   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7: TRUE (4.0/1.0)
-|   |   |   |   |   |   |   redHeralds > 0
-|   |   |   |   |   |   |   |   blueExperienceDiff <= -1353: FALSE (15.0/1.0)
-|   |   |   |   |   |   |   |   blueExperienceDiff > -1353
-|   |   |   |   |   |   |   |   |   blueKills <= 6
-|   |   |   |   |   |   |   |   |   |   redAvgLevel <= 7.2
-|   |   |   |   |   |   |   |   |   |   |   redAssists <= 9
-|   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 5
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 3: FALSE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 3: TRUE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 5: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   redAssists > 9: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   redAvgLevel > 7.2: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   blueKills > 6: FALSE (3.0)
-|   |   |   |   |   |   blueHeralds = TRUE
-|   |   |   |   |   |   |   redAvgLevel <= 7
-|   |   |   |   |   |   |   |   redAssists <= 4: FALSE (3.0)
-|   |   |   |   |   |   |   |   redAssists > 4: TRUE (7.0/1.0)
-|   |   |   |   |   |   |   redAvgLevel > 7
-|   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 239: FALSE (8.0)
-|   |   |   |   |   |   |   |   blueTotalMinionsKilled > 239: TRUE (2.0)
-|   |   |   |   blueExperienceDiff > -741
-|   |   |   |   |   redTowersDestroyed <= 0
-|   |   |   |   |   |   blueDeaths <= 6
-|   |   |   |   |   |   |   redAssists <= 9
-|   |   |   |   |   |   |   |   blueFirstBlood = TRUE: TRUE (132.0/47.0)
-|   |   |   |   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   |   |   |   redAssists <= 5
-|   |   |   |   |   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 2: TRUE (13.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 2
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 2: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 2
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.8: TRUE (19.0/4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 3: TRUE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists > 3: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 4
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= -754: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > -754: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 4: TRUE (5.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= -1097: FALSE (8.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > -1097
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 1: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists > 1
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 219: TRUE (5.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 219
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 514: FALSE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 514: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 4
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 2: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 2: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 4: TRUE (5.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 7: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   redHeralds > 0
-|   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.6: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.6
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= -337
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 2: FALSE (5.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 2: TRUE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > -337: TRUE (7.0)
-|   |   |   |   |   |   |   |   |   |   blueHeralds = TRUE
-|   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 228: TRUE (9.0)
-|   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 228: FALSE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   redAssists > 5
-|   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.6: FALSE (9.0/1.0)
-|   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.6
-|   |   |   |   |   |   |   |   |   |   |   blueKills <= 2: FALSE (9.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   blueKills > 2
-|   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 226
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 200: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 200
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 6: FALSE (6.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists > 6
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.8: FALSE (7.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 4: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 4
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 31: TRUE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > 31: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redHeralds > 0: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 7: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 226: TRUE (25.0/5.0)
-|   |   |   |   |   |   |   redAssists > 9: TRUE (24.0/4.0)
-|   |   |   |   |   |   blueDeaths > 6
-|   |   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   |   blueKills <= 4
-|   |   |   |   |   |   |   |   |   blueKills <= 3
-|   |   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   blueKills > 3
-|   |   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 208: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 208: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE: TRUE (10.0)
-|   |   |   |   |   |   |   |   blueKills > 4
-|   |   |   |   |   |   |   |   |   blueAssists <= 9
-|   |   |   |   |   |   |   |   |   |   blueAssists <= 7
-|   |   |   |   |   |   |   |   |   |   |   redAssists <= 12
-|   |   |   |   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= -485: TRUE (12.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > -485
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 4: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 4
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 7: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 194: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 194: TRUE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.8: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE: FALSE (40.0/18.0)
-|   |   |   |   |   |   |   |   |   |   |   redAssists > 12: FALSE (13.0/2.0)
-|   |   |   |   |   |   |   |   |   |   blueAssists > 7: FALSE (44.0/10.0)
-|   |   |   |   |   |   |   |   |   blueAssists > 9
-|   |   |   |   |   |   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= -428: TRUE (10.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > -428
-|   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 10: FALSE (10.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 10
-|   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 232
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 9: TRUE (10.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 9: FALSE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 232: FALSE (5.0/1.0)
-|   |   |   |   |   |   |   |   |   |   redHeralds > 0: TRUE (9.0/1.0)
-|   |   |   |   |   |   |   blueHeralds = TRUE
-|   |   |   |   |   |   |   |   blueKills <= 5: FALSE (8.0)
-|   |   |   |   |   |   |   |   blueKills > 5
-|   |   |   |   |   |   |   |   |   blueExperienceDiff <= -431: FALSE (6.0)
-|   |   |   |   |   |   |   |   |   blueExperienceDiff > -431
-|   |   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= -63: TRUE (8.0)
-|   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > -63: FALSE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 224: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 224: TRUE (6.0/1.0)
-|   |   |   |   |   redTowersDestroyed > 0
-|   |   |   |   |   |   blueGoldDiff <= -1029: FALSE (9.0)
-|   |   |   |   |   |   blueGoldDiff > -1029
-|   |   |   |   |   |   |   redAssists <= 7
-|   |   |   |   |   |   |   |   redHeralds <= 0: TRUE (3.0/1.0)
-|   |   |   |   |   |   |   |   redHeralds > 0
-|   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 232: FALSE (7.0)
-|   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 232: TRUE (2.0)
-|   |   |   |   |   |   |   redAssists > 7: TRUE (5.0)
+|   |   |   blueCSPerMin <= 17.4: FALSE (28.0/4.0)
+|   |   |   blueCSPerMin > 17.4
+|   |   |   |   blueFirstBlood = TRUE
+|   |   |   |   |   blueEliteMonsters <= 1
+|   |   |   |   |   |   redEliteMonsters <= 0
+|   |   |   |   |   |   |   blueGoldDiff <= 85: FALSE (279.0/130.0)
+|   |   |   |   |   |   |   blueGoldDiff > 85
+|   |   |   |   |   |   |   |   blueGoldDiff <= 176: TRUE (24.0/2.0)
+|   |   |   |   |   |   |   |   blueGoldDiff > 176
+|   |   |   |   |   |   |   |   |   blueTotalGold <= 16246
+|   |   |   |   |   |   |   |   |   |   blueTotalGold <= 15786: FALSE (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   blueTotalGold > 15786: TRUE (2.0)
+|   |   |   |   |   |   |   |   |   blueTotalGold > 16246: FALSE (3.0)
+|   |   |   |   |   |   redEliteMonsters > 0
+|   |   |   |   |   |   |   redCSPerMin <= 23.7: FALSE (81.0/37.0)
+|   |   |   |   |   |   |   redCSPerMin > 23.7: TRUE (16.0/2.0)
+|   |   |   |   |   blueEliteMonsters > 1: TRUE (86.0/35.0)
+|   |   |   |   blueFirstBlood = FALSE
+|   |   |   |   |   redTotalGold <= 15998
+|   |   |   |   |   |   blueTotalGold <= 14609: FALSE (36.0/12.0)
+|   |   |   |   |   |   blueTotalGold > 14609
+|   |   |   |   |   |   |   redTotalExperience <= 18720: TRUE (73.0/17.0)
+|   |   |   |   |   |   |   redTotalExperience > 18720
+|   |   |   |   |   |   |   |   redTotalExperience <= 19065: FALSE (11.0/2.0)
+|   |   |   |   |   |   |   |   redTotalExperience > 19065: TRUE (7.0/1.0)
+|   |   |   |   |   redTotalGold > 15998
+|   |   |   |   |   |   redEliteMonsters <= 0
+|   |   |   |   |   |   |   blueEliteMonsters <= 1: FALSE (292.0/122.0)
+|   |   |   |   |   |   |   blueEliteMonsters > 1
+|   |   |   |   |   |   |   |   blueTotalExperience <= 19071: FALSE (49.0/17.0)
+|   |   |   |   |   |   |   |   blueTotalExperience > 19071: TRUE (5.0)
+|   |   |   |   |   |   redEliteMonsters > 0
+|   |   |   |   |   |   |   blueCSPerMin <= 21.9: FALSE (37.0/8.0)
+|   |   |   |   |   |   |   blueCSPerMin > 21.9
+|   |   |   |   |   |   |   |   redTotalGold <= 17155
+|   |   |   |   |   |   |   |   |   blueGoldDiff <= -951
+|   |   |   |   |   |   |   |   |   |   blueGoldDiff <= -1399: FALSE (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   blueGoldDiff > -1399: TRUE (5.0)
+|   |   |   |   |   |   |   |   |   blueGoldDiff > -951
+|   |   |   |   |   |   |   |   |   |   redCSPerMin <= 21.6
+|   |   |   |   |   |   |   |   |   |   |   blueTotalGold <= 16435: TRUE (3.0)
+|   |   |   |   |   |   |   |   |   |   |   blueTotalGold > 16435: FALSE (2.0)
+|   |   |   |   |   |   |   |   |   |   redCSPerMin > 21.6: FALSE (10.0)
+|   |   |   |   |   |   |   |   redTotalGold > 17155: TRUE (10.0/1.0)
 blueGoldDiff > 211
 |   blueGoldDiff <= 1769
-|   |   blueAvgLevel <= 6.6
-|   |   |   blueTowersDestroyed <= 0
-|   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   redDragons = FALSE
-|   |   |   |   |   |   |   blueAvgLevel <= 6.4
-|   |   |   |   |   |   |   |   redAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   blueDeaths <= 5: TRUE (4.0)
-|   |   |   |   |   |   |   |   |   blueDeaths > 5
-|   |   |   |   |   |   |   |   |   |   blueKills <= 8: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   blueKills > 8: TRUE (3.0/1.0)
-|   |   |   |   |   |   |   |   redAvgLevel > 6.8: FALSE (3.0)
-|   |   |   |   |   |   |   blueAvgLevel > 6.4
-|   |   |   |   |   |   |   |   redAvgLevel <= 6.4: TRUE (11.0/2.0)
-|   |   |   |   |   |   |   |   redAvgLevel > 6.4
-|   |   |   |   |   |   |   |   |   blueKills <= 3: TRUE (4.0)
-|   |   |   |   |   |   |   |   |   blueKills > 3
-|   |   |   |   |   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   |   |   |   |   blueDragons = FALSE
-|   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 212
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 8: FALSE (9.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 8: TRUE (3.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 212: TRUE (6.0)
-|   |   |   |   |   |   |   |   |   |   |   blueDragons = TRUE
-|   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 4: TRUE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 4: FALSE (8.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 7: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   blueHeralds = TRUE
-|   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 3: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   blueDeaths > 3: TRUE (7.0/1.0)
-|   |   |   |   |   |   redDragons = TRUE
-|   |   |   |   |   |   |   blueGoldDiff <= 614: FALSE (20.0/3.0)
-|   |   |   |   |   |   |   blueGoldDiff > 614
-|   |   |   |   |   |   |   |   blueAssists <= 3: TRUE (5.0)
-|   |   |   |   |   |   |   |   blueAssists > 3
-|   |   |   |   |   |   |   |   |   blueKills <= 4: FALSE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   blueKills > 4
-|   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.4: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.4
-|   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 173: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 173
-|   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 234: TRUE (14.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 234: FALSE (2.0)
-|   |   |   |   |   redHeralds > 0
-|   |   |   |   |   |   blueDragons = FALSE
-|   |   |   |   |   |   |   blueKills <= 8: FALSE (3.0)
-|   |   |   |   |   |   |   blueKills > 8
-|   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 203: FALSE (2.0)
-|   |   |   |   |   |   |   |   blueTotalMinionsKilled > 203: TRUE (2.0)
-|   |   |   |   |   |   blueDragons = TRUE
-|   |   |   |   |   |   |   blueTotalMinionsKilled <= 219: TRUE (3.0)
-|   |   |   |   |   |   |   blueTotalMinionsKilled > 219: FALSE (3.0)
-|   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   redAssists <= 10
-|   |   |   |   |   |   blueAvgLevel <= 6.4: FALSE (10.0/2.0)
-|   |   |   |   |   |   blueAvgLevel > 6.4
-|   |   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   |   blueDeaths <= 7
-|   |   |   |   |   |   |   |   |   redAssists <= 8
-|   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.4: TRUE (3.0/1.0)
-|   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.4: FALSE (21.0/5.0)
-|   |   |   |   |   |   |   |   |   redAssists > 8: TRUE (6.0/1.0)
-|   |   |   |   |   |   |   |   blueDeaths > 7: FALSE (4.0)
-|   |   |   |   |   |   |   blueHeralds = TRUE
-|   |   |   |   |   |   |   |   redDragons = FALSE: FALSE (4.0/1.0)
-|   |   |   |   |   |   |   |   redDragons = TRUE: TRUE (2.0)
-|   |   |   |   |   redAssists > 10: TRUE (4.0)
-|   |   |   blueTowersDestroyed > 0
-|   |   |   |   blueDeaths <= 6: TRUE (6.0)
-|   |   |   |   blueDeaths > 6
-|   |   |   |   |   blueFirstBlood = TRUE: FALSE (4.0)
-|   |   |   |   |   blueFirstBlood = FALSE: TRUE (4.0/1.0)
-|   |   blueAvgLevel > 6.6
-|   |   |   redDragons = FALSE
-|   |   |   |   redAvgLevel <= 6.4
-|   |   |   |   |   blueDeaths <= 6: TRUE (51.0/4.0)
-|   |   |   |   |   blueDeaths > 6
-|   |   |   |   |   |   blueAssists <= 5: FALSE (3.0)
-|   |   |   |   |   |   blueAssists > 5
-|   |   |   |   |   |   |   blueAssists <= 12: TRUE (12.0/2.0)
-|   |   |   |   |   |   |   blueAssists > 12: FALSE (2.0)
-|   |   |   |   redAvgLevel > 6.4
-|   |   |   |   |   blueAvgLevel <= 7.2
-|   |   |   |   |   |   blueDragons = FALSE
-|   |   |   |   |   |   |   blueExperienceDiff <= 885
-|   |   |   |   |   |   |   |   redAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 203: FALSE (11.0/2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 203
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 9
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.6: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.6
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 5
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 5
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 2
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 3: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 3
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 1101: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > 1101: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 2
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 231
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 1273: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > 1273: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 231: TRUE (6.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   redAssists > 5: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 5: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 7: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 9: TRUE (9.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.8: FALSE (55.0/23.0)
-|   |   |   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE: TRUE (69.0/33.0)
-|   |   |   |   |   |   |   |   |   |   blueHeralds = TRUE
-|   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 234: FALSE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 234: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 201: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 201
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 4: FALSE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 4: TRUE (7.0)
-|   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7: FALSE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   redHeralds > 0
-|   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 201: TRUE (8.0)
-|   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 201
-|   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 616: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > 616: TRUE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 7: FALSE (6.0)
-|   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7: TRUE (2.0)
-|   |   |   |   |   |   |   |   redAvgLevel > 7
-|   |   |   |   |   |   |   |   |   blueDeaths <= 8
-|   |   |   |   |   |   |   |   |   |   redHeralds <= 0: TRUE (30.0/4.0)
-|   |   |   |   |   |   |   |   |   |   redHeralds > 0
-|   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 756: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > 756: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   blueDeaths > 8: FALSE (3.0)
-|   |   |   |   |   |   |   blueExperienceDiff > 885
-|   |   |   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   |   |   blueDeaths <= 6: TRUE (81.0/12.0)
-|   |   |   |   |   |   |   |   |   blueDeaths > 6
-|   |   |   |   |   |   |   |   |   |   redAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   blueAssists <= 10
-|   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.6: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.6
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 7: FALSE (5.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAssists > 7: TRUE (7.0)
-|   |   |   |   |   |   |   |   |   |   |   blueAssists > 10: TRUE (10.0)
-|   |   |   |   |   |   |   |   |   |   redAvgLevel > 7: FALSE (2.0)
-|   |   |   |   |   |   |   |   blueHeralds = TRUE
-|   |   |   |   |   |   |   |   |   blueTowersDestroyed <= 0
-|   |   |   |   |   |   |   |   |   |   blueDeaths <= 5
-|   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 235: FALSE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 235: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7
-|   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 554: FALSE (3.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > 554: TRUE (5.0)
-|   |   |   |   |   |   |   |   |   |   blueDeaths > 5: TRUE (8.0)
-|   |   |   |   |   |   |   |   |   blueTowersDestroyed > 0: FALSE (3.0/1.0)
-|   |   |   |   |   |   blueDragons = TRUE
-|   |   |   |   |   |   |   blueAssists <= 4
-|   |   |   |   |   |   |   |   blueAssists <= 1
-|   |   |   |   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   |   |   |   redAssists <= 4: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   |   redAssists > 4: TRUE (3.0/1.0)
-|   |   |   |   |   |   |   |   |   blueHeralds = TRUE: TRUE (3.0)
-|   |   |   |   |   |   |   |   blueAssists > 1: TRUE (142.0/25.0)
-|   |   |   |   |   |   |   blueAssists > 4
-|   |   |   |   |   |   |   |   redHeralds <= 0: TRUE (516.0/172.0)
-|   |   |   |   |   |   |   |   redHeralds > 0
-|   |   |   |   |   |   |   |   |   redAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   blueKills <= 9: TRUE (37.0/7.0)
-|   |   |   |   |   |   |   |   |   |   blueKills > 9
-|   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 896: FALSE (5.0)
-|   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 896: TRUE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   redAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 220: TRUE (6.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 220
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= -391: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > -391: TRUE (5.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 7
-|   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 6
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 5: TRUE (3.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueKills > 5: FALSE (5.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 6: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 219: FALSE (7.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 219
-|   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 5
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 364: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > 364: FALSE (6.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueKills > 5: TRUE (6.0/1.0)
-|   |   |   |   |   blueAvgLevel > 7.2
-|   |   |   |   |   |   blueAssists <= 5: TRUE (39.0/2.0)
-|   |   |   |   |   |   blueAssists > 5
-|   |   |   |   |   |   |   blueDragons = FALSE
-|   |   |   |   |   |   |   |   redTotalMinionsKilled <= 226
-|   |   |   |   |   |   |   |   |   blueGoldDiff <= 517: FALSE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   blueGoldDiff > 517: TRUE (14.0)
-|   |   |   |   |   |   |   |   redTotalMinionsKilled > 226: FALSE (4.0)
-|   |   |   |   |   |   |   blueDragons = TRUE
-|   |   |   |   |   |   |   |   blueAssists <= 6: TRUE (12.0)
-|   |   |   |   |   |   |   |   blueAssists > 6
-|   |   |   |   |   |   |   |   |   blueDeaths <= 8
-|   |   |   |   |   |   |   |   |   |   blueKills <= 9
-|   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 2: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   blueDeaths > 2
-|   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 304: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > 304: TRUE (31.0/4.0)
-|   |   |   |   |   |   |   |   |   |   blueKills > 9: FALSE (7.0/2.0)
-|   |   |   |   |   |   |   |   |   blueDeaths > 8: TRUE (7.0)
-|   |   |   redDragons = TRUE
-|   |   |   |   redAvgLevel <= 7
-|   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   blueGoldDiff <= 625
-|   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   blueAvgLevel <= 7.2
-|   |   |   |   |   |   |   |   |   redAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 341
-|   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 5: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueKills > 5: FALSE (5.0)
-|   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.8: TRUE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   |   blueGoldDiff > 341: FALSE (19.0/2.0)
-|   |   |   |   |   |   |   |   |   redAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 212: FALSE (13.0/2.0)
-|   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 212
-|   |   |   |   |   |   |   |   |   |   |   blueAssists <= 2: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   blueAssists > 2
-|   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 2: FALSE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 2
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 9: TRUE (9.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 9
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 20: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 20: TRUE (2.0)
-|   |   |   |   |   |   |   |   blueAvgLevel > 7.2: TRUE (4.0)
-|   |   |   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   |   |   blueGoldDiff <= 573
-|   |   |   |   |   |   |   |   |   redAssists <= 9
-|   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 5
-|   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 455
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 289: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 289: FALSE (8.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > 455: TRUE (5.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   blueDeaths > 5: TRUE (11.0/1.0)
-|   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 224
-|   |   |   |   |   |   |   |   |   |   |   |   blueKills <= 6
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 236: TRUE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueTotalMinionsKilled > 236: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueKills > 6: FALSE (7.0)
-|   |   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 224: TRUE (6.0)
-|   |   |   |   |   |   |   |   |   redAssists > 9: TRUE (8.0/1.0)
-|   |   |   |   |   |   |   |   blueGoldDiff > 573: FALSE (10.0/1.0)
-|   |   |   |   |   |   blueGoldDiff > 625
-|   |   |   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   redAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   redAssists <= 1: TRUE (6.0)
-|   |   |   |   |   |   |   |   |   |   redAssists > 1
-|   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.6: TRUE (22.0/4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.6
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 7: FALSE (33.0/15.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 7
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 1288: TRUE (17.0/2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 1288: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   blueDeaths > 7
-|   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7: FALSE (8.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7: TRUE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   redAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled <= 210: TRUE (28.0/2.0)
-|   |   |   |   |   |   |   |   |   |   redTotalMinionsKilled > 210
-|   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 3
-|   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 1
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 1: TRUE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 1: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redAssists > 1: TRUE (6.0)
-|   |   |   |   |   |   |   |   |   |   |   blueDeaths > 3
-|   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 6
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 5: TRUE (3.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 5: FALSE (14.0/3.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 6: TRUE (8.0/1.0)
-|   |   |   |   |   |   |   |   blueFirstBlood = FALSE: TRUE (125.0/50.0)
-|   |   |   |   |   |   |   redHeralds > 0
-|   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   redAvgLevel <= 6.6: TRUE (7.0/1.0)
-|   |   |   |   |   |   |   |   |   redAvgLevel > 6.6
-|   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7
-|   |   |   |   |   |   |   |   |   |   |   blueKills <= 7
-|   |   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 4
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 970: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > 970: TRUE (5.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueDeaths > 4: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   blueKills > 7: TRUE (4.0)
-|   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7
-|   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 1112: TRUE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > 1112: FALSE (6.0)
+|   |   redDragons = FALSE: TRUE (1470.0/485.0)
+|   |   redDragons = TRUE
+|   |   |   blueGoldDiff <= 828
+|   |   |   |   redEliteMonsters <= 1
+|   |   |   |   |   blueCSPerMin <= 19.2
+|   |   |   |   |   |   redTotalGold <= 16557: FALSE (16.0)
+|   |   |   |   |   |   redTotalGold > 16557
+|   |   |   |   |   |   |   blueCSPerMin <= 18.8: TRUE (4.0)
+|   |   |   |   |   |   |   blueCSPerMin > 18.8: FALSE (4.0)
+|   |   |   |   |   blueCSPerMin > 19.2
+|   |   |   |   |   |   blueEliteMonsters <= 0
+|   |   |   |   |   |   |   blueTotalExperience <= 18838
+|   |   |   |   |   |   |   |   blueFirstBlood = TRUE: FALSE (95.0/41.0)
 |   |   |   |   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   |   |   |   blueKills <= 6: TRUE (12.0)
-|   |   |   |   |   |   |   |   |   blueKills > 6
-|   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.8: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 1371: FALSE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 1371: TRUE (5.0/1.0)
-|   |   |   |   |   blueHeralds = TRUE
-|   |   |   |   |   |   blueTowersDestroyed <= 0
-|   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   redAvgLevel <= 6.8: TRUE (54.0/21.0)
-|   |   |   |   |   |   |   |   redAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   blueKills <= 3: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   blueKills > 3
-|   |   |   |   |   |   |   |   |   |   redAssists <= 8
-|   |   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 7: TRUE (19.0/4.0)
-|   |   |   |   |   |   |   |   |   |   |   blueAvgLevel > 7
-|   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 5
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists <= 5: TRUE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   blueAssists > 5
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 1320: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > 1320: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   |   redAssists > 5: FALSE (4.0)
-|   |   |   |   |   |   |   |   |   |   redAssists > 8: FALSE (3.0)
+|   |   |   |   |   |   |   |   |   blueCSPerMin <= 22.2
+|   |   |   |   |   |   |   |   |   |   blueTotalExperience <= 17761
+|   |   |   |   |   |   |   |   |   |   |   redTotalExperience <= 17789
+|   |   |   |   |   |   |   |   |   |   |   |   redCSPerMin <= 17.5: FALSE (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   redCSPerMin > 17.5: TRUE (12.0/2.0)
+|   |   |   |   |   |   |   |   |   |   |   redTotalExperience > 17789: FALSE (3.0)
+|   |   |   |   |   |   |   |   |   |   blueTotalExperience > 17761: FALSE (21.0/2.0)
+|   |   |   |   |   |   |   |   |   blueCSPerMin > 22.2: TRUE (42.0/14.0)
+|   |   |   |   |   |   |   blueTotalExperience > 18838
+|   |   |   |   |   |   |   |   blueCSPerMin <= 23.3: TRUE (31.0/4.0)
+|   |   |   |   |   |   |   |   blueCSPerMin > 23.3
+|   |   |   |   |   |   |   |   |   redTotalGold <= 16031: FALSE (5.0)
+|   |   |   |   |   |   |   |   |   redTotalGold > 16031: TRUE (13.0/4.0)
+|   |   |   |   |   |   blueEliteMonsters > 0
+|   |   |   |   |   |   |   blueFirstBlood = TRUE: FALSE (58.0/26.0)
 |   |   |   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   |   |   blueDeaths <= 5
-|   |   |   |   |   |   |   |   |   blueGoldDiff <= 966: FALSE (15.0/2.0)
-|   |   |   |   |   |   |   |   |   blueGoldDiff > 966
-|   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 1006: TRUE (6.0)
-|   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 1006: FALSE (3.0/1.0)
-|   |   |   |   |   |   |   |   blueDeaths > 5
-|   |   |   |   |   |   |   |   |   blueAssists <= 10
-|   |   |   |   |   |   |   |   |   |   blueAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   |   |   redAvgLevel <= 6.6: TRUE (3.0)
-|   |   |   |   |   |   |   |   |   |   |   redAvgLevel > 6.6: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   blueAvgLevel > 6.8: TRUE (9.0)
-|   |   |   |   |   |   |   |   |   blueAssists > 10: FALSE (2.0)
-|   |   |   |   |   |   blueTowersDestroyed > 0
-|   |   |   |   |   |   |   blueTowersDestroyed <= 1
-|   |   |   |   |   |   |   |   redAvgLevel <= 6.8
-|   |   |   |   |   |   |   |   |   redAssists <= 13: TRUE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   redAssists > 13: FALSE (2.0)
-|   |   |   |   |   |   |   |   redAvgLevel > 6.8
-|   |   |   |   |   |   |   |   |   blueGoldDiff <= 1477
-|   |   |   |   |   |   |   |   |   |   redAssists <= 8: FALSE (8.0)
-|   |   |   |   |   |   |   |   |   |   redAssists > 8
-|   |   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 428: FALSE (2.0)
-|   |   |   |   |   |   |   |   |   |   |   blueGoldDiff > 428: TRUE (2.0)
-|   |   |   |   |   |   |   |   |   blueGoldDiff > 1477: TRUE (2.0)
-|   |   |   |   |   |   |   blueTowersDestroyed > 1: TRUE (2.0)
-|   |   |   |   redAvgLevel > 7
-|   |   |   |   |   redAssists <= 3
-|   |   |   |   |   |   redAvgLevel <= 7.2
-|   |   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   |   blueExperienceDiff <= -808: FALSE (3.0)
-|   |   |   |   |   |   |   |   blueExperienceDiff > -808
-|   |   |   |   |   |   |   |   |   blueKills <= 6
-|   |   |   |   |   |   |   |   |   |   blueAssists <= 6
-|   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 1091: TRUE (12.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 1091: FALSE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   |   blueAssists > 6: FALSE (4.0/1.0)
-|   |   |   |   |   |   |   |   |   blueKills > 6: TRUE (4.0)
-|   |   |   |   |   |   |   blueHeralds = TRUE
-|   |   |   |   |   |   |   |   blueTotalMinionsKilled <= 241: FALSE (2.0)
-|   |   |   |   |   |   |   |   blueTotalMinionsKilled > 241: TRUE (2.0)
-|   |   |   |   |   |   redAvgLevel > 7.2: TRUE (4.0)
-|   |   |   |   |   redAssists > 3
-|   |   |   |   |   |   redHeralds <= 0
-|   |   |   |   |   |   |   blueHeralds = FALSE
-|   |   |   |   |   |   |   |   redAvgLevel <= 7.2
-|   |   |   |   |   |   |   |   |   blueGoldDiff <= 293: TRUE (6.0)
-|   |   |   |   |   |   |   |   |   blueGoldDiff > 293
-|   |   |   |   |   |   |   |   |   |   blueFirstBlood = TRUE
-|   |   |   |   |   |   |   |   |   |   |   blueDeaths <= 4: TRUE (6.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   blueDeaths > 4
-|   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 73: FALSE (11.0/1.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 73
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAssists <= 7: TRUE (5.0)
-|   |   |   |   |   |   |   |   |   |   |   |   |   redAssists > 7: FALSE (3.0/1.0)
-|   |   |   |   |   |   |   |   |   |   blueFirstBlood = FALSE
-|   |   |   |   |   |   |   |   |   |   |   redAssists <= 4: FALSE (6.0)
-|   |   |   |   |   |   |   |   |   |   |   redAssists > 4
-|   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff <= 220: FALSE (7.0)
-|   |   |   |   |   |   |   |   |   |   |   |   blueExperienceDiff > 220: TRUE (7.0/1.0)
-|   |   |   |   |   |   |   |   redAvgLevel > 7.2: TRUE (4.0/1.0)
-|   |   |   |   |   |   |   blueHeralds = TRUE
-|   |   |   |   |   |   |   |   redAssists <= 4: TRUE (3.0)
-|   |   |   |   |   |   |   |   redAssists > 4: FALSE (26.0/5.0)
-|   |   |   |   |   |   redHeralds > 0: FALSE (20.0/5.0)
+|   |   |   |   |   |   |   |   blueTotalGold <= 16592
+|   |   |   |   |   |   |   |   |   blueTotalExperience <= 17975
+|   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 462: TRUE (3.0)
+|   |   |   |   |   |   |   |   |   |   blueGoldDiff > 462: FALSE (2.0)
+|   |   |   |   |   |   |   |   |   blueTotalExperience > 17975: FALSE (11.0)
+|   |   |   |   |   |   |   |   blueTotalGold > 16592
+|   |   |   |   |   |   |   |   |   blueGoldDiff <= 439
+|   |   |   |   |   |   |   |   |   |   blueGoldDiff <= 291: TRUE (3.0)
+|   |   |   |   |   |   |   |   |   |   blueGoldDiff > 291: FALSE (6.0/1.0)
+|   |   |   |   |   |   |   |   |   blueGoldDiff > 439: TRUE (8.0)
+|   |   |   |   redEliteMonsters > 1
+|   |   |   |   |   blueFirstBlood = TRUE
+|   |   |   |   |   |   blueCSPerMin <= 24.7
+|   |   |   |   |   |   |   redCSPerMin <= 20.7
+|   |   |   |   |   |   |   |   redCSPerMin <= 19.9: FALSE (3.0)
+|   |   |   |   |   |   |   |   redCSPerMin > 19.9
+|   |   |   |   |   |   |   |   |   blueCSPerMin <= 23.4: TRUE (3.0)
+|   |   |   |   |   |   |   |   |   blueCSPerMin > 23.4: FALSE (2.0)
+|   |   |   |   |   |   |   redCSPerMin > 20.7: FALSE (11.0)
+|   |   |   |   |   |   blueCSPerMin > 24.7: TRUE (3.0)
+|   |   |   |   |   blueFirstBlood = FALSE: FALSE (24.0/11.0)
+|   |   |   blueGoldDiff > 828
+|   |   |   |   blueEliteMonsters <= 0: TRUE (343.0/123.0)
+|   |   |   |   blueEliteMonsters > 0
+|   |   |   |   |   blueFirstBlood = TRUE
+|   |   |   |   |   |   redTotalGold <= 15989: TRUE (54.0/18.0)
+|   |   |   |   |   |   redTotalGold > 15989
+|   |   |   |   |   |   |   redTotalGold <= 17099: FALSE (33.0/9.0)
+|   |   |   |   |   |   |   redTotalGold > 17099: TRUE (4.0)
+|   |   |   |   |   blueFirstBlood = FALSE: TRUE (28.0/11.0)
 |   blueGoldDiff > 1769: TRUE (2283.0/325.0)
 
-Number of Leaves  : 	541
+Number of Leaves  :     120
 
-Size of the tree : 	1081
+Size of the tree :  239
 
 
-Time taken to build model: 0.49 seconds
+Time taken to build model: 0.31 seconds
 
 === Stratified cross-validation ===
 === Summary ===
 
-Correctly Classified Instances        6828               69.1163 %
-Incorrectly Classified Instances      3051               30.8837 %
-Kappa statistic                          0.3823
-Mean absolute error                      0.3597
-Root mean squared error                  0.5   
-Relative absolute error                 71.947  %
-Root relative squared error             99.997  %
+Correctly Classified Instances        7040               71.2623 %
+Incorrectly Classified Instances      2839               28.7377 %
+Kappa statistic                          0.4252
+Mean absolute error                      0.3646
+Root mean squared error                  0.448 
+Relative absolute error                 72.9142 %
+Root relative squared error             89.6098 %
 Total Number of Instances             9879     
 
 === Detailed Accuracy By Class ===
 
                  TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
-                 0,698    0,316    0,689      0,698    0,694      0,382    0,693     0,646     FALSE
-                 0,684    0,302    0,693      0,684    0,689      0,382    0,693     0,628     TRUE
-Weighted Avg.    0,691    0,309    0,691      0,691    0,691      0,382    0,693     0,637     
+                 0,725    0,300    0,708      0,725    0,717      0,425    0,762     0,723     FALSE
+                 0,700    0,275    0,717      0,700    0,709      0,425    0,762     0,713     TRUE
+Weighted Avg.    0,713    0,287    0,713      0,713    0,713      0,425    0,762     0,718     
 
 === Confusion Matrix ===
 
     a    b   <-- classified as
- 3456 1493 |    a = FALSE
- 1558 3372 |    b = TRUE
+ 3588 1361 |    a = FALSE
+ 1478 3452 |    b = TRUE
 ```
-### DECISION STUMP
-```sehll
-=== Run information ===
 
-Scheme:       weka.classifiers.trees.DecisionStump 
-Relation:     datos_simplificados
-Instances:    9879
-Attributes:   23
-              blueWins
-              blueFirstBlood
-              blueKills
-              blueDeaths
-              blueAssists
-              blueDragons
-              blueHeralds
-              blueTowersDestroyed
-              blueAvgLevel
-              blueTotalMinionsKilled
-              blueGoldDiff
-              blueExperienceDiff
-              redFirstBlood
-              redKills
-              redDeaths
-              redAssists
-              redDragons
-              redHeralds
-              redTowersDestroyed
-              redAvgLevel
-              redTotalMinionsKilled
-              redGoldDiff
-              redExperienceDiff
-Test mode:    10-fold cross-validation
+#### Decision Stump
 
+``` shell
 === Classifier model (full training set) ===
 
 Decision Stump
@@ -1267,17 +571,17 @@ blueGoldDiff is missing : FALSE
 Class distributions
 
 blueGoldDiff <= 212.0
-FALSE	TRUE	
-0.7116878196628149	0.2883121803371851	
+FALSE   TRUE    
+0.7116878196628149  0.2883121803371851  
 blueGoldDiff > 212.0
-FALSE	TRUE	
-0.2591304347826087	0.7408695652173913	
+FALSE   TRUE    
+0.2591304347826087  0.7408695652173913  
 blueGoldDiff is missing
-FALSE	TRUE	
-0.5009616357930965	0.4990383642069035	
+FALSE   TRUE    
+0.5009616357930965  0.4990383642069035  
 
 
-Time taken to build model: 0.05 seconds
+Time taken to build model: 0.04 seconds
 
 === Stratified cross-validation ===
 === Summary ===
@@ -1304,5 +608,3 @@ Weighted Avg.    0,724    0,276    0,725      0,724    0,724      0,449    0,717
  3744 1205 |    a = FALSE
  1520 3410 |    b = TRUE
 ```
-
-
