@@ -58,9 +58,9 @@ public class Modelo {
 
     public String aplicarModelo() {
         try{
-            String[] valoresAtributos = {"Iris-setosa", "Iris-versicolor", "Iris-virginica"};
+            String[] valoresAtributos = {"TRUE", "FALSE"};
             Classifier clasificador  = (Classifier) weka.core.SerializationHelper.read("./models/objetoJ48Iris.model");
-            Instances data = leerInstancias("./test_data/test.arff");
+            Instances data = leerInstancias("./test_data/test_lol.arff");
             return valoresAtributos[(int) clasificador.classifyInstance(data.instance(0))];
         }catch (Exception ex) {
             Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);

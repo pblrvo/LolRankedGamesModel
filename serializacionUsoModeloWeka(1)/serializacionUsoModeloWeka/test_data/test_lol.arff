@@ -1,0 +1,24 @@
+@relation test
+
+@attribute blueFirstBlood {TRUE,FALSE}
+@attribute blueEliteMonsters numeric
+@attribute blueDragons {FALSE,TRUE}
+@attribute blueTotalGold numeric
+@attribute blueTotalExperience numeric
+@attribute blueGoldDiff numeric
+@attribute blueCSPerMin numeric
+@attribute redFirstBlood {FALSE,TRUE}
+@attribute redEliteMonsters numeric
+@attribute redDragons {FALSE,TRUE}
+@attribute redTotalGold numeric
+@attribute redTotalExperience numeric
+@attribute redGoldDiff numeric
+@attribute redCSPerMin numeric
+@attribute blueWins {FALSE,TRUE}
+
+
+@DATA
+TRUE,1,TRUE,18132,18076,2883,22.8,FALSE,0,FALSE,15249,15965,-2883,22.7,?
+%
+%
+%
