@@ -46,7 +46,7 @@ public class Modelo {
             cls.buildClassifier(inst);
 
             // serialize model
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("./models/objetoJ48Iris.model"));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("./models/modeloJ48.model"));
             oos.writeObject(cls);
             oos.flush();
             oos.close();
