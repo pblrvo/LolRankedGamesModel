@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import weka.classifiers.Classifier;
 import weka.classifiers.trees.J48;
+import weka.classifiers.functions.MultilayerPerceptron;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
 
@@ -39,7 +40,7 @@ public class Modelo {
     {
         try {
             // create J48
-            Classifier cls = new J48();
+            Classifier cls = new MultilayerPerceptron();
 
             // train
             Instances inst = leerInstancias("./training_data/high_diamond_ranked_10min.arff");
