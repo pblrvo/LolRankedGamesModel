@@ -59,7 +59,7 @@ public class Modelo {
     public String aplicarModelo() {
         try{
             String[] valoresAtributos = {"TRUE", "FALSE"};
-            Classifier clasificador  = (Classifier) weka.core.SerializationHelper.read("./models/objetoJ48Iris.model");
+            Classifier clasificador  = (Classifier) weka.core.SerializationHelper.read("./models/modeloJ48.model");
             Instances data = leerInstancias("./test_data/test_lol.arff");
             return valoresAtributos[(int) clasificador.classifyInstance(data.instance(0))];
         }catch (Exception ex) {
