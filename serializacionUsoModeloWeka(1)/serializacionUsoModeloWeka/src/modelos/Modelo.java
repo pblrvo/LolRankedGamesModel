@@ -24,26 +24,27 @@ import weka.core.converters.ConverterUtils;
  */
 public class Modelo {
 
-    private Instances leerInstancias(String ficherArff){
-        try{
+    private Instances leerInstancias(String ficherArff) {
+        try {
             Instances inst = new Instances(new BufferedReader(new FileReader(ficherArff)));
             inst.setClassIndex(inst.numAttributes() - 1);
 
             return inst;
-        }catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
 
-    public void aprenderModelo()
-    {
+    public void aprenderModelo() {
         try {
             // create J48
             Classifier cls = new MultilayerPerceptron();
 
             // train
             Instances inst = leerInstancias("./training_data/high_diamond_ranked_10min.arff");
+            // Instances inst = leerInstancias("./training_data/iris.arff");
+
             cls.buildClassifier(inst);
 
             // serialize model
@@ -58,12 +59,21 @@ public class Modelo {
     }
 
     public String aplicarModelo() {
-        try{
-            String[] valoresAtributos = {"TRUE", "FALSE"};
-            Classifier clasificador  = (Classifier) weka.core.SerializationHelper.read("./models/modeloJ48.model");
+        try {
+            String[] valoresAtributos = { "TRUE", "FALSE" };
+            // String[] valoresAtributos = { "iris setosa", "iris versicolor", "iris
+            // virginica" };
+
+            Classifier clasificador = (Classifier) weka.core.SerializationHelper.read("./models/modeloJ48.model");
             Instances data = leerInstancias("./test_data/test_lol.arff");
-            return valoresAtributos[(int) clasificador.classifyInstance(data.instance(0))];
-        }catch (Exception ex) {
+            // Instances data = leerInstancias("./test_data/test.arff");
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 12; i++)
+                sb.append(valoresAtributos[(int) clasificador.classifyInstance(data.instance(i))] + ", ");
+            return sb.toString();
+            // return valoresAtributos[(int)
+            // clasificador.classifyInstance(data.instance(0))];
+        } catch (Exception ex) {
             Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
             return "Error al intentar leer el modelo";
         }
