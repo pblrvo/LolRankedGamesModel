@@ -1,6 +1,29 @@
 # APRENDIZAJE AUTOMÁTICO LolRankedGamesModel
 
-##### Realizaremos el aprendizaje cogiendo dátos de partidas del videojuego League Of Legends sobre quien gana la partida si el equipo rojo o el equipo azul básandonos en los datos de los 10 primeros minutos de partida. En específico tomaremos los siguientes datos de ambos equipos:
+### EJECUCIÓN
+
+1. Creación del archivo .jar
+
+```SHELL
+make jar
+```
+
+2. Ejecucuón del archivo .jar
+
+```shell
+java -jar aprendizaje.jar 
+```
+
+### ¿Cómo lo hemos realizado?
+
+- En primer lugar, nos hemos metido en *[https://www.kaggle.com/datasets](https://www.kaggle.com/datasets)* y nos hemos descargado los datos consiguiendo un fichero .CSV
+- En segundo lugar, hemos cogido ese fichero y hemos escogido los datos que hemos visto más relevantes para realizar el aprendizaje de nuestra Inteligencia Artificial.
+- Más tarde, hemos metido el nuevo fichero dentro de la aplicación WEKA y conseguimos nuestro fichero .arff que necesitaremos para introducirlo dentro de nuestro código.
+- También creamos nuestro modelo desde WEKA en este caso hemos escojido un modelo J48(ID3) para el aprendizaje. Hemos escogido este modelo ya que es el modelo que hemos considerado mejor.
+- Por último hemos creado un fichero .arff para realizar el test y que nuestra IA nos de la respuesta que considere correcta.
+
+Realizaremos el aprendizaje cogiendo dátos de partidas del videojuego League Of Legends sobre quien gana la partida si el equipo rojo o el equipo azul básandonos en los datos de los 10 primeros minutos de partida. En específico tomaremos los siguientes datos de ambos equipos:
+
 - [ ] Primera kill
 - [ ] Número de "Mounstros Élite" eliminados
 - [ ] Número de dragones conseguidos
@@ -9,7 +32,8 @@
 - [ ] Diferencia de oro
 - [ ] Minions eliminados por minuto
 - [ ] Gana el equipo AZUL
-##### Dentro de weka los datos quedarían así para realizar las diferentes comprobaciones
+
+- Dentro de weka los datos quedarían así para realizar las diferentes comprobaciones
 
 ```shell
 === Run information ===
@@ -37,6 +61,7 @@ Test mode:    10-fold cross-validation
 ```
 
 ## SOLUCIONES DISTINTOS ALGORITMOS
+
 #### Multilayer Perceptron
 
 ```shell
@@ -221,14 +246,14 @@ Mean absolute error                      0.3513
 Root mean squared error                  0.4286
 Relative absolute error                 70.2542 %
 Root relative squared error             85.7103 %
-Total Number of Instances             9879     
+Total Number of Instances             9879   
 
 === Detailed Accuracy By Class ===
 
                  TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
                  0,693    0,255    0,732      0,693    0,712      0,438    0,800     0,796     FALSE
                  0,745    0,307    0,707      0,745    0,726      0,438    0,800     0,797     TRUE
-Weighted Avg.    0,719    0,281    0,719      0,719    0,719      0,438    0,800     0,796     
+Weighted Avg.    0,719    0,281    0,719      0,719    0,719      0,438    0,800     0,796   
 
 === Confusion Matrix ===
 
@@ -260,14 +285,14 @@ Mean absolute error                      0.3576
 Root mean squared error                  0.4296
 Relative absolute error                 71.5113 %
 Root relative squared error             85.9124 %
-Total Number of Instances             9879     
+Total Number of Instances             9879   
 
 === Detailed Accuracy By Class ===
 
                  TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
                  0,730    0,292    0,715      0,730    0,722      0,438    0,796     0,791     FALSE
                  0,708    0,270    0,723      0,708    0,716      0,438    0,796     0,791     TRUE
-Weighted Avg.    0,719    0,281    0,719      0,719    0,719      0,438    0,796     0,791     
+Weighted Avg.    0,719    0,281    0,719      0,719    0,719      0,438    0,796     0,791   
 
 === Confusion Matrix ===
 
@@ -275,6 +300,7 @@ Weighted Avg.    0,719    0,281    0,719      0,719    0,719      0,438    0,796
  3611 1338 |    a = FALSE
  1438 3492 |    b = TRUE
 ```
+
 #### J48 (ID30)
 
 ```shell
@@ -539,14 +565,14 @@ Mean absolute error                      0.3646
 Root mean squared error                  0.448 
 Relative absolute error                 72.9142 %
 Root relative squared error             89.6098 %
-Total Number of Instances             9879     
+Total Number of Instances             9879   
 
 === Detailed Accuracy By Class ===
 
                  TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
                  0,725    0,300    0,708      0,725    0,717      0,425    0,762     0,723     FALSE
                  0,700    0,275    0,717      0,700    0,709      0,425    0,762     0,713     TRUE
-Weighted Avg.    0,713    0,287    0,713      0,713    0,713      0,425    0,762     0,718     
+Weighted Avg.    0,713    0,287    0,713      0,713    0,713      0,425    0,762     0,718   
 
 === Confusion Matrix ===
 
@@ -557,7 +583,7 @@ Weighted Avg.    0,713    0,287    0,713      0,713    0,713      0,425    0,762
 
 #### Decision Stump
 
-``` shell
+```shell
 === Classifier model (full training set) ===
 
 Decision Stump
@@ -571,13 +597,13 @@ blueGoldDiff is missing : FALSE
 Class distributions
 
 blueGoldDiff <= 212.0
-FALSE   TRUE    
+FALSE   TRUE  
 0.7116878196628149  0.2883121803371851  
 blueGoldDiff > 212.0
-FALSE   TRUE    
+FALSE   TRUE  
 0.2591304347826087  0.7408695652173913  
 blueGoldDiff is missing
-FALSE   TRUE    
+FALSE   TRUE  
 0.5009616357930965  0.4990383642069035  
 
 
@@ -593,14 +619,14 @@ Mean absolute error                      0.3986
 Root mean squared error                  0.4468
 Relative absolute error                 79.7221 %
 Root relative squared error             89.3594 %
-Total Number of Instances             9879     
+Total Number of Instances             9879   
 
 === Detailed Accuracy By Class ===
 
                  TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
                  0,757    0,308    0,711      0,757    0,733      0,449    0,717     0,670     FALSE
                  0,692    0,243    0,739      0,692    0,715      0,449    0,717     0,682     TRUE
-Weighted Avg.    0,724    0,276    0,725      0,724    0,724      0,449    0,717     0,676     
+Weighted Avg.    0,724    0,276    0,725      0,724    0,724      0,449    0,717     0,676   
 
 === Confusion Matrix ===
 
